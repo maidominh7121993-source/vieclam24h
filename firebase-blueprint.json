@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile information and credits",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "avatar": { "type": "string" },
+        "location": { "type": "string" },
+        "rating": { "type": "number" },
+        "credits": { "type": "number" },
+        "isVerified": { "type": "boolean" },
+        "identityScore": { "type": "number" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email", "name"]
+    },
+    "Job": {
+      "title": "Job Listing",
+      "description": "Job posting details",
+      "type": "object",
+      "properties": {
+        "jobId": { "type": "string" },
+        "title": { "type": "string" },
+        "employerId": { "type": "string" },
+        "employer": { "type": "object" },
+        "category": { "type": "string" },
+        "salary": { "type": "string" },
+        "location": { "type": "string" },
+        "description": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "isUrgent": { "type": "boolean" },
+        "isBoosted": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["open", "closed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "employerId", "salary", "location"]
+    },
+    "Application": {
+      "title": "Job Application",
+      "description": "Application from a user to a job",
+      "type": "object",
+      "properties": {
+        "applicationId": { "type": "string" },
+        "jobId": { "type": "string" },
+        "applicantId": { "type": "string" },
+        "applicantName": { "type": "string" },
+        "applicantPhone": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected"] },
+        "appliedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["jobId", "applicantId"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System notifications and recharge requests",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Chat": {
+      "title": "Chat Session",
+      "description": "Conversation between two users",
+      "type": "object",
+      "properties": {
+        "chatId": { "type": "string" },
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "lastMessage": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "Individual message in a chat",
+      "type": "object",
+      "properties": {
+        "chatId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "UserProfile", "description": "User profiles" },
+    "/jobs/{jobId}": { "schema": "Job", "description": "Job listings" },
+    "/applications/{appId}": { "schema": "Application", "description": "Job applications" },
+    "/notifications/{notifId}": { "schema": "Notification", "description": "System notifications" },
+    "/chats/{chatId}": { "schema": "Chat", "description": "Chat sessions" },
+    "/chats/{chatId}/messages/{msgId}": { "schema": "Message", "description": "Chat messages" }
+  }
+}

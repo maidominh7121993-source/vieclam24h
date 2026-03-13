@@ -1,0 +1,5 @@
+{
+  "name": "ViecGap24h",
+  "description": "A mobile-first platform for urgent job postings and local work opportunities in Vietnam.",
+  "requestFramePermissions": ["geolocation"]
+}
